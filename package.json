@@ -1,0 +1,26 @@
+{
+  "name": "datadog-metrics-reporter",
+  "version": "1.0.0",
+  "description": "Datadog Metrics API Reporter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broffis/datadog-metrics-reporter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/broffis/datadog-metrics-reporter/issues"
+  },
+  "homepage": "https://github.com/broffis/datadog-metrics-reporter#readme",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@datadog/datadog-api-client": "^1.12.0"
+  }
+}
