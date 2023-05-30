@@ -30,7 +30,7 @@ jobs:
           node-version-file: ".nvmrc"
       - id: send-metrics
         uses: actions/github-script@v6
-        inputs:
+        env:
           data: ${{ needs.set-outputs.outputs.data }}
         with:
           script: |
