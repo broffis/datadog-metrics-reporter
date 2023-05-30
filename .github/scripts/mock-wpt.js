@@ -1,5 +1,5 @@
 module.exports = ({ core }) => {
-  core.setOuput(
+  core.setOutput(
     "data",
     JSON.stringify({
       cruxData: {
