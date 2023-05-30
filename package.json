@@ -4,7 +4,7 @@
   "description": "Datadog Metrics API Reporter",
   "main": "index.js",
   "scripts": {
-    "run": "tsc && node dist/example.js"
+    "report": "tsc && node dist/example.js"
   },
   "repository": {
     "type": "git",
