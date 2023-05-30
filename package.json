@@ -4,7 +4,7 @@
   "description": "Datadog Metrics API Reporter",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "tsc && node dist/example.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/broffis/datadog-metrics-reporter#readme",
   "devDependencies": {
+    "@types/node": "^20.2.4",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.12.0"
+    "@datadog/datadog-api-client": "^1.12.0",
+    "cross-var": "^1.1.0",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^7.2.1"
   }
 }
