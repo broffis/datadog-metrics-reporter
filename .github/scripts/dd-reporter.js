@@ -2,6 +2,7 @@
 
 module.exports = ({ core }) => {
   const inputData = core.getInput("data");
+  console.log({ inputData });
   // const configuration = client.createConfiguration();
   // const apiInstance = new v2.MetricsApi(configuration);
   // const params = {
