@@ -32,7 +32,9 @@ module.exports = (metric) => {
 
   console.log({ metric });
   apiInstance
-    .submitMetrics(params)
+    .submitMetrics(params, {
+      authMethods: { apiKeyAuth: process.env.DD_API_KEY },
+    })
     .then((data) => {
       console.log(
         "API called successfully. Returned data: " + JSON.stringify(data)
