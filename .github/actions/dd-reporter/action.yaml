@@ -6,33 +6,27 @@ inputs:
     description: "Metrics to send to datadog"
     required: true
     default: "[]"
-  datadog-api-key:
-    description: "Datadog API key"
-    required: true
+  # datadog-api-key:
+  #   description: "Datadog API key"
+  #   required: true
 
 runs:
   using: composite
   steps:
     - name: Setup Node
       uses: actions/setup-node@v3
-      # - name: Install
-      #   run: |
-      #     rm package*
-      #     cd .github/scripts
-      #     npm i @datadog/datadog-api-client
-      # shell: bash
     - name: Report Metrics
       uses: actions/github-script@v6
       id: dd-metric-reporter
       env:
-        DD_API_KEY: ${{ inputs.datadog-api-key }}
+        DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
         DD_SITE: us3.datadoghq.com
       with:
         script: |
           const run = require('.github/scripts/dd-reporter.js');
           const data = JSON.parse('${{ inputs.metrics }}');
           const tags = [
-            "env:dev",
+            "site:build",
             "cwv:proof",
             "wpt:github",
             `"page:${data.pageName}"`,
