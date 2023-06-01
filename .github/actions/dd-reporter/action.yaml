@@ -28,6 +28,7 @@ runs:
         DD_API_KEY: ${{ inputs.datadog-api-key }}
         DD_SITE: us3.datadoghq.com
       with:
+        metrics: ${{ inputs.metrics }}
         script: |
           const run = require('.github/scripts/dd-reporter.js')
           run({ core });
