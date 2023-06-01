@@ -1,4 +1,5 @@
-import { client, v2 } from "@datadog/datadog-api-client";
+// import { client, v2 } from "@datadog/datadog-api-client";
+const { client, v2 } = require("@datadog/datadog-api-client");
 
 module.exports = (metric) => {
   const { name, value, tags } = metric;
