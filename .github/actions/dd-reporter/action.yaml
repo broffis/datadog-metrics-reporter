@@ -1,0 +1,33 @@
+name: DataDog Reporter
+description: Send CWV metrics to datadog using their v2 api
+
+inputs:
+  metrics:
+    description: "Metrics to send to datadog"
+    required: true
+    default: "[]"
+  datadog_api_key:
+    description: "Datadog API key"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+    - name: Install
+      run: |
+        rm package*
+        cd .github/scripts
+        npm i @datadog/datadog-api-client
+      shell: bash
+    - name: Report Metrics
+      uses: actions/github-script@v6
+      id: dd-metric-reporter
+      env:
+        DD_API_KEY: ${{ inputs.datadog_api_key }}
+        DD_SITE: us3.datadoghq.com
+      with:
+        script: |
+          const run = require('.github/scripts/dd-reporter.js')
+          run({ core });

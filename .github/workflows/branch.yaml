@@ -24,15 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: set-outputs
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: ./.github/actions/dd-reporter
+        id: dd-reporter
         with:
-          node-version-file: ".nvmrc"
-      - id: send-metrics
-        uses: actions/github-script@v6
-        env:
-          data: ${{ needs.set-outputs.outputs.data }}
-        with:
-          script: |
-            const script = require('.github/scripts/dd-reporter.js');
-            script({ core });
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
+          metrics: ${{ needs.set-outputs.outputs.data }}
