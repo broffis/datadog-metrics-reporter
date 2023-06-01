@@ -40,7 +40,7 @@ runs:
           ]
           Object.entries(data).forEach(([key, value]) => {
             run({
-              metricName: key,
+              metricName: `cwv.nightly.${key}`,
               metricValue: value,
               tags});
           });
