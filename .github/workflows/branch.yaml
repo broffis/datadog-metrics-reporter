@@ -26,6 +26,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install
+        run: |
+          rm package*
+          cd .github/scripts
+          npm i @datadog/datadog-api-client dotenv
       - uses: ./.github/actions/dd-reporter
         id: dd-reporter
         with:

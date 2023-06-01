@@ -15,11 +15,11 @@ runs:
   steps:
     - name: Setup Node
       uses: actions/setup-node@v3
-    - name: Install
-      run: |
-        rm package*
-        cd .github/scripts
-        npm i @datadog/datadog-api-client
+      # - name: Install
+      #   run: |
+      #     rm package*
+      #     cd .github/scripts
+      #     npm i @datadog/datadog-api-client
       shell: bash
     - name: Report Metrics
       uses: actions/github-script@v6
