@@ -20,7 +20,7 @@ runs:
       #     rm package*
       #     cd .github/scripts
       #     npm i @datadog/datadog-api-client
-      shell: bash
+      # shell: bash
     - name: Report Metrics
       uses: actions/github-script@v6
       id: dd-metric-reporter
