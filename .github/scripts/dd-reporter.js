@@ -1,7 +1,7 @@
 // import { client, v2 } from "@datadog/datadog-api-client";
 
 module.exports = ({ core }) => {
-  const inputData = core.getInput("data");
+  const inputData = core.getInput("metrics");
   console.log({ inputData });
 
   // const envData = process.env.data;

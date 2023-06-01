@@ -6,7 +6,7 @@ inputs:
     description: "Metrics to send to datadog"
     required: true
     default: "[]"
-  datadog_api_key:
+  datadog-api-key:
     description: "Datadog API key"
     required: true
 
@@ -25,7 +25,7 @@ runs:
       uses: actions/github-script@v6
       id: dd-metric-reporter
       env:
-        DD_API_KEY: ${{ inputs.datadog_api_key }}
+        DD_API_KEY: ${{ inputs.datadog-api-key }}
         DD_SITE: us3.datadoghq.com
       with:
         script: |
