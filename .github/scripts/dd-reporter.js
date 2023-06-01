@@ -30,7 +30,7 @@ module.exports = (metric) => {
     },
   };
 
-  console.log({ params });
+  console.log({ metric });
   // apiInstance
   //   .submitMetrics(params)
   //   .then((data) => {
