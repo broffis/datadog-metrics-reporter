@@ -38,7 +38,7 @@ runs:
             `"page:${data.pageName}"`,
             `"device:${data.device}"`,
           ]
-          Object.entries(data).forEach(([key, value]) => {
+          Object.entries(data.cruxData).forEach(([key, value]) => {
             run({
               name: `cwv.nightly.${key}`,
               value,
