@@ -1,10 +1,14 @@
-// import { client, v2 } from "@datadog/datadog-api-client";
 const { client, v2 } = require("@datadog/datadog-api-client");
 
 module.exports = (metric) => {
   const { name, value, tags } = metric;
 
-  const configuration = client.createConfiguration();
+  const configuration = client.createConfiguration({
+    authMethods: {
+      apiKeyAuth: process.env.DD_API_KEY,
+    },
+  });
+
   const apiInstance = new v2.MetricsApi(configuration);
   const params = {
     body: {
@@ -32,9 +36,7 @@ module.exports = (metric) => {
 
   console.log({ metric });
   apiInstance
-    .submitMetrics(params, {
-      authMethods: { apiKeyAuth: process.env.DD_API_KEY },
-    })
+    .submitMetrics(params)
     .then((data) => {
       console.log(
         "API called successfully. Returned data: " + JSON.stringify(data)
