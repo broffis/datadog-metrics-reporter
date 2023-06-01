@@ -29,5 +29,18 @@ runs:
         DD_SITE: us3.datadoghq.com
       with:
         script: |
-          const run = require('.github/scripts/dd-reporter.js')
-          run({ core }, { metrics: ${{ inputs.metrics }}});
+          const run = require('.github/scripts/dd-reporter.js');
+          const data = JSON.parse('${{ inputs.metrics }}');
+          const tags = [
+            "env:dev",
+            "cwv:proof",
+            "wpt:github",
+            `"page:${data.pageName}"`,
+            `"device:${data.device}"`,
+          ]
+          Object.entries(data).forEach(([key, value]) => {
+            run({
+              metricName: key,
+              metricValue: value,
+              tags});
+          });
