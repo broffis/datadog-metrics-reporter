@@ -1,15 +1,14 @@
-// import { client, v2 } from "@datadog/datadog-api-client";
+import { client, v2 } from "@datadog/datadog-api-client";
 
 module.exports = (metric) => {
   const { name, value, tags } = metric;
 
-  // const configuration = client.createConfiguration();
-  // const apiInstance = new v2.MetricsApi(configuration);
+  const configuration = client.createConfiguration();
+  const apiInstance = new v2.MetricsApi(configuration);
   const params = {
     body: {
       series: [
         {
-          // metric: "cwv.nightly.largestContentfulPaint",
           metric: name,
           type: 0,
           points: [
@@ -31,12 +30,12 @@ module.exports = (metric) => {
   };
 
   console.log({ metric });
-  // apiInstance
-  //   .submitMetrics(params)
-  //   .then((data) => {
-  //     console.log(
-  //       "API called successfully. Returned data: " + JSON.stringify(data)
-  //     );
-  //   })
-  //   .catch((error) => console.error(error));
+  apiInstance
+    .submitMetrics(params)
+    .then((data) => {
+      console.log(
+        "API called successfully. Returned data: " + JSON.stringify(data)
+      );
+    })
+    .catch((error) => console.error(error));
 };
