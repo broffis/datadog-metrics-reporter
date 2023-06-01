@@ -35,3 +35,4 @@ jobs:
         id: dd-reporter
         with:
           metrics: ${{ needs.set-outputs.outputs.data }}
+        secrets: inherit
