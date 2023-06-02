@@ -1,0 +1,40 @@
+name: DataDog Reporter
+description: Send CWV metrics to datadog using their v2 api
+
+inputs:
+  metrics:
+    description: "Metrics to send to datadog"
+    required: true
+    default: "[]"
+  datadog-api-key:
+    description: "Datadog API key"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+    - name: Report Metrics
+      uses: actions/github-script@v6
+      id: dd-metric-reporter
+      env:
+        DD_API_KEY: ${{ inputs.datadog-api-key }}
+        DD_SITE: us3.datadoghq.com
+      with:
+        script: |
+          const run = require('.github/scripts/dd-reporter.js');
+          const data = JSON.parse('${{ inputs.metrics }}');
+          const tags = [
+            "site:build",
+            "cwv:proof",
+            "wpt:github",
+            `"page:${data.pageName}"`,
+            `"device:${data.device}"`,
+          ]
+          Object.entries(data.cruxData).forEach(([key, value]) => {
+            run({
+              name: `cwv.nightly.${key}`,
+              value,
+              tags});
+          });

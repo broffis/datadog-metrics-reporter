@@ -3,8 +3,15 @@
  */
 
 import { client, v2 } from "@datadog/datadog-api-client";
+import { config } from "dotenv";
 
-const configuration = client.createConfiguration();
+config();
+
+const configuration = client.createConfiguration({
+  authMethods: {
+    apiKeyAuth: process.env.DD_API_KEY,
+  },
+});
 const apiInstance = new v2.MetricsApi(configuration);
 
 const params: v2.MetricsApiSubmitMetricsRequest = {
@@ -16,7 +23,8 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         points: [
           {
             timestamp: Math.round(new Date().getTime() / 1000),
-            value: 10418.11,
+            // value: 10418.11,
+            value: 13000,
           },
         ],
         resources: [

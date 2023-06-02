@@ -1,0 +1,38 @@
+name: "Test"
+on:
+  pull_request:
+
+jobs:
+  set-outputs:
+    name: Set data output to mock WPT runner
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.mock-wpt.outputs.data }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+      - id: mock-wpt
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('.github/scripts/mock-wpt.js');
+            script({ core });
+  send-metrics:
+    name: Send Metrics to Datadog
+    runs-on: ubuntu-latest
+    needs: set-outputs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install
+        run: |
+          rm package*
+          cd .github/scripts
+          npm i @datadog/datadog-api-client dotenv
+      - uses: ./.github/actions/dd-reporter
+        id: dd-reporter
+        with:
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
+          metrics: ${{ needs.set-outputs.outputs.data }}

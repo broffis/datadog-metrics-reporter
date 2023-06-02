@@ -4,7 +4,13 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const datadog_api_client_1 = require("@datadog/datadog-api-client");
-const configuration = datadog_api_client_1.client.createConfiguration();
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
+const configuration = datadog_api_client_1.client.createConfiguration({
+    authMethods: {
+        apiKeyAuth: process.env.DD_API_KEY,
+    },
+});
 const apiInstance = new datadog_api_client_1.v2.MetricsApi(configuration);
 const params = {
     body: {
@@ -14,8 +20,9 @@ const params = {
                 type: 0,
                 points: [
                     {
-                        timestamp: Math.round(new Date().getDate() / 1000),
-                        value: 10418.11,
+                        timestamp: Math.round(new Date().getTime() / 1000),
+                        // value: 10418.11,
+                        value: 13000,
                     },
                 ],
                 resources: [
