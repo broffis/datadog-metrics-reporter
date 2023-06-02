@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/broffis/datadog-metrics-reporter#readme",
   "devDependencies": {
+    "@datadog/datadog-api-client": "^1.13.0",
     "@types/node": "^20.2.4",
     "typescript": "^5.0.4"
   },
